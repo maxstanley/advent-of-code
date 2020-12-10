@@ -48,7 +48,7 @@ limits of their respective policies.
 How many passwords are valid according to their policies?
 422
 
--- Part Two ---
+--- Part Two ---
 While it appears you validated the passwords correctly,
 they don't seem to be what the Official Toboggan
 Corporate Authentication System is expecting.
@@ -75,7 +75,7 @@ How many passwords are valid according to the new interpretation of
 the policies? 451
 */
 
-// Day02 a
+// Day02 Main
 func Day02() {
 	fmt.Println("Day 02")
 

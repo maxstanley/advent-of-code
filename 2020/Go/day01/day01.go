@@ -64,7 +64,7 @@ In your expense report, what is the product of the three
 entries that sum to 2020? 236873508
 */
 
-// Day01 a
+// Day01 Main
 func Day01() {
 	fmt.Println("Day 01")
 
