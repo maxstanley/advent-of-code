@@ -49,7 +49,7 @@ so the correct answer is 514579.
 
 Of course, your expense report is much larger. Find the two
 entries that sum to 2020; what do you get if you multiply
-them together?
+them together? 365619
 
 --- Part Two ---
 The Elves in accounting are thankful for your help; one of
@@ -63,7 +63,7 @@ Using the above example again, the three entries that sum to
 produces the answer, 241861950.
 
 In your expense report, what is the product of the three
-entries that sum to 2020?
+entries that sum to 2020? 236873508
 */
 
 func main() {
