@@ -1,9 +1,8 @@
-package main
+package day02
 
 import (
-	"bufio"
+	"aoc/shared"
 	"fmt"
-	"os"
 	"strconv"
 	"strings"
 )
@@ -76,11 +75,12 @@ How many passwords are valid according to the new interpretation of
 the policies? 451
 */
 
-func main() {
+// Day02 a
+func Day02() {
 	fmt.Println("Day 02")
 
-	lines, _ := readLinesFromFile("./input.txt")
-	pairs := keyValueSplit(lines, ": ")
+	lines, _ := shared.ReadLinesFromFile("./day02/input.txt")
+	pairs := shared.KeyValueSplit(lines, ": ")
 	countSled := countValidPasswords(pairs, checkPasswordValidSled)
 	count := countValidPasswords(pairs, checkPasswordValid)
 
@@ -130,28 +130,4 @@ func checkPasswordValidSled(policy string, password string) bool {
 	}
 
 	return true
-}
-
-func keyValueSplit(items []string, splitChar string) (pairs [][]string) {
-	for _, item := range items {
-		pair := strings.Split(item, splitChar)
-		pairs = append(pairs, pair)
-	}
-	return
-}
-
-func readLinesFromFile(path string) ([]string, error) {
-	file, err := os.Open(path)
-
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	var lines []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	return lines, scanner.Err()
 }

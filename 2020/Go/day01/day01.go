@@ -1,10 +1,8 @@
-package main
+package day01
 
 import (
-	"bufio"
+	"aoc/shared"
 	"fmt"
-	"os"
-	"strconv"
 )
 
 /*
@@ -66,11 +64,12 @@ In your expense report, what is the product of the three
 entries that sum to 2020? 236873508
 */
 
-func main() {
+// Day01 a
+func Day01() {
 	fmt.Println("Day 01")
 
-	lines, _ := readLinesFromFile("./input.txt")
-	numbers := stringArrayToIntegerArray(lines)
+	lines, _ := shared.ReadLinesFromFile("./day01/input.txt")
+	numbers := shared.StringArrayToIntegerArray(lines)
 	a, b := getSum2Items(numbers, 2020)
 	x, y, z := getSum3Items(numbers, 2020)
 
@@ -105,28 +104,4 @@ func getSum3Items(numbers []int, target int) (int, int, int) {
 	}
 
 	return -1, -1, -1
-}
-
-func stringArrayToIntegerArray(sArray []string) (iArray []int) {
-	for _, s := range sArray {
-		i, _ := strconv.Atoi(s)
-		iArray = append(iArray, i)
-	}
-	return
-}
-
-func readLinesFromFile(path string) ([]string, error) {
-	file, err := os.Open(path)
-
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	var lines []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	return lines, scanner.Err()
 }
