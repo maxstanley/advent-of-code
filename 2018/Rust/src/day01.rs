@@ -11,7 +11,7 @@ fn total_frequency_change(frequency_change_list: Vec<String>) -> Result<i32, std
     Ok(frequency)
 }
 
-use hashbrown::HashSet;
+use std::collections::HashSet;
 
 #[allow(dead_code)]
 fn first_duplicate_frequency(frequency_change_list: Vec<String>) -> Result<i32, std::num::ParseIntError> {
