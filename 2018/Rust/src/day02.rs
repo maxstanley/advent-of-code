@@ -43,6 +43,61 @@ fn checksum(id_vector: Vec<String>) -> u16 {
     counts.0 * counts.1
 }
 
+fn one_off(a: &String, b: &String) -> bool {
+    if a.len() != b.len() {
+        return false;
+    }
+
+    let a_bytes = a.as_bytes();
+    let b_bytes = b.as_bytes();
+
+    let mut diffs = 0;
+    for i in 0..a.len() {
+        if a_bytes[i] != b_bytes[i] {
+            if diffs == 1 {
+                return false;
+            } else {
+                diffs = 1;
+            }
+        }
+    }
+    true
+}
+
+fn common_chars(a: &String, b: &String) -> String {
+    let a_bytes = a.as_bytes();
+    let b_bytes = b.as_bytes();
+
+    let mut string_builder = String::new();
+    for i in 0..a.len() {
+        if a_bytes[i] == b_bytes[i] {
+            string_builder.push(a_bytes[i].into());
+        }
+    }
+    println!("{}", string_builder);
+    string_builder
+}
+
+#[allow(dead_code)]
+fn one_char_off_common(id_vector: Vec<String>) -> String {
+    let mut vec = id_vector.clone();
+    // should probably do a reverse if one way doesn't find a solution, as it
+    // is likely the first char that is different.
+    vec.sort();
+
+    let mut previous = String::from("");
+    for id in vec {
+        println!("id: {}", id);
+        if one_off(&previous, &id) {
+            println!("One Off!");
+            return common_chars(&previous, &id);
+        }
+        previous = id;
+    }
+
+    String::from("")
+}
+
 #[cfg(test)]
 mod tests {
     // This imports names from the outer scope.
@@ -103,5 +158,26 @@ mod tests {
     fn part_1() {
         let vec = common::lines_from_file(String::from("input/day02.txt"));
         assert_eq!(checksum(vec), 6696);
+    }
+
+    #[test]
+    fn example_9() {
+        let mut vec = Vec::new();
+        vec![
+            "abcde",
+            "fghij",
+            "klmno",
+            "pqrst",
+            "fguij",
+            "fguij",
+            "wvxyz",
+        ].iter().for_each(|&f| vec.push(f.to_string()));
+        assert_eq!(one_char_off_common(vec), String::from("fgij"));
+    }
+
+    #[test]
+    fn part_2() {
+        let vec = common::lines_from_file(String::from("input/day02.txt"));
+        assert_eq!(one_char_off_common(vec), String::from("bvnfawcnyoeyudzrpgslimtkj"));
     }
 }
