@@ -2,20 +2,11 @@ use crate::error::Error;
 
 use std::str::FromStr;
 
+#[derive(Default)]
 struct Submarine {
     horizontal: i64,
     depth: i64,
     aim: i64,
-}
-
-impl Default for Submarine {
-    fn default() -> Self {
-        Self {
-            horizontal: 0,
-            depth: 0,
-            aim: 0,
-        }
-    }
 }
 
 impl Submarine {
@@ -55,7 +46,7 @@ impl FromStr for Direction {
     type Err = Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let (axis, magnitude) = s.split_once(" ").ok_or(Error::ParseError)?;
+        let (axis, magnitude) = s.split_once(' ').ok_or(Error::ParseError)?;
 
         let magnitude = magnitude.parse::<i64>()?;
 
@@ -77,7 +68,7 @@ where
     T: AsRef<str>,
 {
     let list = lines
-        .into_iter()
+        .iter()
         // Parse each line into a Direction.
         // If the parse is unsuccessful, map the error to the custom error type.
         .map(|l| l.as_ref().parse::<Direction>().map_err(Into::into))

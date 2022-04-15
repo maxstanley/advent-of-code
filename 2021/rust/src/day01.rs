@@ -5,7 +5,7 @@ where
     T: AsRef<str>,
 {
     let list: Vec<u64> = lines
-        .into_iter()
+        .iter()
         // Parse each line into a u64.
         // If the parse is unsuccessful, map the error to the custom error type.
         .map(|l| l.as_ref().parse::<u64>().map_err(Into::into))
